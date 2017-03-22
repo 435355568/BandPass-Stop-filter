@@ -1,0 +1,1598 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ValueImage</name>
+    </assembly>
+    <members>
+        <member name="T:ValueImage.Interface.IFilter">
+            <summary>
+             图形过滤接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.ComponentFilter(System.Drawing.Bitmap,ValueImage.Infrastructure.RateFilterType)">
+            <summary>
+             成分滤波
+            </summary>
+            <param name="type">滤波类型</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.LowpassFilter(System.Drawing.Bitmap,System.Double)">
+            <summary>
+             低通滤波
+            </summary>
+            <param name="radius">滤波边界(大于该边界都不可通过)</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.HighpassFilter(System.Drawing.Bitmap,System.Double)">
+            <summary>
+             高通滤波
+            </summary>
+            <param name="radius">滤波边界(小于该边界都不可通过)</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.BandstopFilter(System.Drawing.Bitmap,System.Double,System.Double)">
+            <summary>
+             带阻滤波
+            </summary>
+            <param name="innerRadius">滤波圆周内边界</param>
+            <param name="outerRadius">滤波圆周外边界</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.BandpassFilter(System.Drawing.Bitmap,System.Double,System.Double)">
+            <summary>
+             带通滤波
+            </summary>
+            <param name="innerRadius">滤波圆周内边界</param>
+            <param name="outerRadius">滤波圆周外边界</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.OrientationFilter(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+             方位滤波
+            </summary>
+            <param name="startOrient">起始方位</param>
+            <param name="endOrient">终止方位</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.MeanFilter(System.Drawing.Bitmap,ValueImage.Infrastructure.TemplateType)">
+            <summary>
+             均值滤波
+            </summary>
+            <param name="type">模板大小类型</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.MedianFilter(System.Drawing.Bitmap,ValueImage.Infrastructure.TemplateType)">
+            <summary>
+             中值滤波
+            </summary>
+            <param name="type">模板大小类型</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.Wavelet(System.Drawing.Bitmap,ValueImage.Infrastructure.WaveletLowpassType,System.Boolean,System.Byte,System.Int32)">
+            <summary>
+             二维小波变化
+            </summary>
+            <param name="lowpassType">低通滤波类型</param>
+            <param name="hardThreshold">是否为硬阀值</param>
+            <param name="thresholding">阀值</param>
+            <param name="series">关于小波变换级数的参数</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.GaussFilter(System.Drawing.Bitmap,System.Double)">
+            <summary>
+             高斯滤波
+            </summary>
+            <param name="sigma">方差</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFilter.StatisticFilter(System.Drawing.Bitmap,ValueImage.Infrastructure.TemplateType,System.Double)">
+            <summary>
+             统计方法滤波
+            </summary>
+            <param name="thresholding">阀值</param>
+            <param name="type">滤波窗口大小</param>
+        </member>
+        <member name="T:ValueImage.Infrastructure.TemplateType">
+            <summary>
+             模板规格类型
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.TemplateType.T3x3">
+            <summary>
+             3x3矩形模板
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.TemplateType.T5x5">
+            <summary>
+             5x5矩形模板
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.TemplateType.T7x7">
+            <summary>
+             7x7矩形模板
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.MaskType">
+            <summary>
+             模型算子锐化类型
+            </summary>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.FFT2(System.Byte[],System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+             二维快速傅里叶变换
+            </summary>
+            <param name="rgbBytes">图像序列</param>
+            <param name="width">图像宽度</param>
+            <param name="realWidth">图像实际宽度</param>
+            <param name="height">图像长度</param>
+            <param name="inv">是否进行坐标位移变换</param>
+            <returns></returns>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.IFFT2(MathHelper.Infrastructure.Complex[],System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+             二维快速傅里叶逆变换
+            </summary>
+            <param name="freData">频域数据</param>
+            <param name="width">图像宽度</param>
+            <param name="realWidth">图像真是宽度</param>
+            <param name="height">图像长度</param>
+            <param name="inv">是否进行坐标位移变换,要与二维快速傅里叶正交变换一致</param>
+            <returns></returns>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.lowpassFilter(System.Byte[]@,System.Int32,System.Int32,System.Double,System.Byte[]@)">
+            <summary>
+             低通滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="radius">滤波圆周边界(大于该边界都不可通过)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.highpassFilter(System.Byte[]@,System.Int32,System.Int32,System.Double,System.Byte[]@)">
+            <summary>
+             高通滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="radius">滤波边界(小于该边界都不可通过)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.bandstopFilter(System.Byte[]@,System.Int32,System.Int32,System.Double,System.Double,System.Byte[]@)">
+            <summary>
+             带阻滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="innerRadius">滤波圆周内边界</param>
+            <param name="outerRadius">滤波圆周外边界</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.bandpassFilter(System.Byte[]@,System.Int32,System.Int32,System.Double,System.Double,System.Byte[]@)">
+            <summary>
+             带通滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="innerRadius">滤波圆周内边界</param>
+            <param name="outerRadius">滤波圆周外边界</param>
+            <param name="result"></param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.orientationFilter(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             方位滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="startOrient">起始方位</param>
+            <param name="endOrient">终止方位</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.meanFilter(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.TemplateType,System.Byte[]@)">
+            <summary>
+             均值滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="type">滤波窗口大小</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.medianFilter(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.TemplateType,System.Byte[]@)">
+            <summary>
+             中值滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="type">滤波窗口类型</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.gaussSmooth(System.Byte[]@,System.Int32,System.Double,System.Byte[]@)">
+            <summary>
+             高斯平滑
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="borderLength">二维数据边长(必须是正方形)</param>
+            <param name="sigma">方差</param>
+            <param name="result">处理后结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.statisticFilter(System.Byte[]@,System.Int32,System.Int32,System.Double,ValueImage.Infrastructure.TemplateType,System.Byte[]@)">
+            <summary>
+             统计方法滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="thresholding">阈值</param>
+            <param name="type">滤波窗口大小</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.fillRectangle(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte)">
+            <summary>
+             填充矩形
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="startRow">起始行索引</param>
+            <param name="startCol">起始列索引</param>
+            <param name="endRow">终止行索引</param>
+            <param name="endCol">终止列索引</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.linearChange(System.Byte[]@,System.Single,System.Single)">
+            <summary>
+             对图像已指定像素按 kx+b 线性变换
+            </summary>
+            <param name="data">要处理的一维数据</param>
+            <param name="slope">斜率</param>
+            <param name="displacements">平移</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.bilinearRotate(System.Byte[]@,System.Int32,System.Int32,System.Double,System.Int32,System.Int32,System.Byte,System.Byte[]@)">
+            <summary>
+             双线性插值旋转
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="degree">逆时针旋转弧度</param>
+            <param name="newWidth">新二维数据宽度</param>
+            <param name="newHeight">新二维数据高度</param>
+            <param name="result">新二维数据</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.nearestNeighborZoom(System.Byte[]@,System.Int32,System.Int32,System.Double,System.Double,System.Byte[]@)">
+            <summary>
+             最近邻插值法
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">二维数据宽度</param>
+            <param name="height">二维数据高度</param>
+            <param name="zoomingX">水平缩放倍数</param>
+            <param name="zoomingY">垂直缩放倍数</param>
+            <param name="result">处理后结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.bileanerZoom(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             双线性插值法
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="newWidth">新二维数据宽度</param>
+            <param name="newHeight">新二维数据高度</param>
+            <param name="result">缩放后二维数据</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.zoom(System.Int32,System.Int32,System.Drawing.Bitmap,System.Drawing.Imaging.PixelFormat)">
+            <summary>
+             系统内置算法缩放图片
+            </summary>
+            <param name="width">图片宽度</param>
+            <param name="height">图片高度</param>
+            <param name="orgImage">缩放的图片</param>
+            <param name="format">缩放后格式</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.spliceImage(System.Int32,System.Byte[]@,System.Byte[]@,System.Byte[]@,ValueImage.Infrastructure.ImageInfo@)">
+            <summary>
+             拼接图片
+            </summary>
+            <param name="width">拼接后图片内存法宽度</param>
+            <param name="info">拼接图片的信息</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.houghAccumulate(System.Byte[]@,System.Int32,System.Int32,System.Int32[0:,0:]@,System.Int32@)">
+            <summary>
+             Hough变化累加器
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="maxHough">最大累计器值</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.cutRectangle(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             切割图片
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="startRow">起始行索引</param>
+            <param name="startCol">起始列索引</param>
+            <param name="endRow">终止行索引</param>
+            <param name="endCol">终止列索引</param>
+            <param name="result">切割后的数据</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.hilditchThinning(System.Byte[]@,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Hilditch细化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.zhangThinning(System.Byte[]@,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Zhange细化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.zhangExpandThinning(System.Byte[]@,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Zhang扩展细化
+             貌似还不如不扩展.. 有点问题
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.erode(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.FilterWindowType,System.Byte[]@)">
+            <summary>
+             腐蚀
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="type">腐蚀模板的类型</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.delation(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.FilterWindowType,System.Byte[]@)">
+            <summary>
+             膨胀
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="type">膨胀模板的类型</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.grayDelation(System.Byte[]@,System.Int32,System.Int32,System.Byte[],System.Byte[]@)">
+            <summary>
+             灰度形态膨胀
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="template">模板赋值</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.grayErode(System.Byte[]@,System.Int32,System.Int32,System.Byte[],System.Byte[]@)">
+            <summary>
+             灰度形态腐蚀
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="template">模板赋值</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.kfillFilter(System.Byte[]@,System.Int32,System.Int32)">
+            <summary>
+             kFill滤波器(不完全)
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.robertsEdge(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Roberts算子边缘锐化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="thresholding">阈值(阈值为零的话, 不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.prewittEdge(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Prewitt算子边缘锐化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="thresholding">阈值(阈值为零的话, 不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.sobelEdge(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Sobel算子边缘锐化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="thresholding">阈值(阈值为零的话, 不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.laplacainEdge(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Laplacian算子边缘锐化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="thresholding">阈值(阈值为零的话, 不进行二值化)</param>
+            <param name="typeNum">算子类型(1型,2型,3型)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.kirschEdge(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             Kirsch算子边缘锐化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="thresholding">阈值(阈值为零的话, 不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.gaussConv(System.Byte[]@,System.Int32,System.Int32,System.Double[],System.Double[]@)">
+            <summary>
+             计算高斯卷积
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="mask">高斯掩膜</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.offsetAngle(System.Byte[]@,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+             确定一般情况下图片偏移角度
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="angle">偏移角度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.noiseKiller(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.FilterLevelType)">
+            <summary>
+             去除噪声
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="level">等级</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.fileBreakpoint(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.FilterLevelType)">
+            <summary>
+             填充断点
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="level">等级</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.projectionV2(System.Byte[]@,System.Int32,System.Int32,System.Double,ValueImage.Infrastructure.OrientationType,System.Int32[]@)">
+            <summary>
+             像素投影 黑点为1, 白点为0
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="angle">角度</param>
+            <param name="orientType">投影方向</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.shewCorrectProjection(System.Byte[]@,System.Int32,System.Int32,System.Double@)">
+            <summary>
+             投影法 倾斜校正
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="angle">倾斜的角度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.convertToByte(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte[0:,0:]@)">
+            <summary>
+             将指定矩形框内图片转化为数据
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="startRow">起始行</param>
+            <param name="startCol">起始列</param>
+            <param name="endRow">终止行</param>
+            <param name="endCol">终止列</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.gaussNoise(System.Byte[]@,System.Double,System.Double)">
+            <summary>
+             高斯噪声
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="mean">均值</param>
+            <param name="meanDeviation">均方差</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.rayleighNoise(System.Byte[]@,System.Double,System.Double)">
+            <summary>
+             瑞利噪声
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="paramA">参数A</param>
+            <param name="paramB">参数B</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.indexNoise(System.Byte[]@,System.Double)">
+            <summary>
+             指数噪声
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="param">参数a(a>0)</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.pepperNoise(System.Byte[]@,System.Double,System.Double)">
+            <summary>
+             椒盐噪声
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="pepper">椒量</param>
+            <param name="salt">盐量</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.FFT(System.Byte[]@,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+             快速傅里叶变化
+            </summary>
+            <param name="data">二维数据(必须是2的幂次方)</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="inv">是否进行坐标位移变换</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.FFT(System.Byte[]@,System.Int32,System.Int32,System.Boolean,MathHelper.Infrastructure.Complex[]@)">
+            <summary>
+             快速傅里叶变化
+            </summary>
+            <param name="data">二维数据(必须是2的幂次方)</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="inv">是否进行坐标位移变换</param>
+            <param name="result">返回的结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.IFFT(MathHelper.Infrastructure.Complex[]@,System.Int32,System.Int32,System.Boolean,System.Byte[]@)">
+            <summary>
+             快速傅里叶你变化
+            </summary>
+            <param name="data">二维数据(必须是2的幂次方)</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="inv">是否进行坐标位移变换</param>
+            <param name="result">返回的结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.amplitude(System.Byte[]@,System.Int32,System.Int32)">
+            <summary>
+             幅度图像
+            </summary>
+            <param name="data">二维数据(必须是2的幂次方)</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.phase(System.Byte[]@,System.Int32,System.Int32)">
+            <summary>
+             相位图像
+            </summary>
+            <param name="data">二维数据(必须是2的幂次方)</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据宽度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.gabor(System.Byte[]@,System.Int32,System.Int32,MathHelper.Infrastructure.GaborParam,System.Byte[]@)">
+            <summary>
+             盖博滤波
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="gaborParam">盖博参数</param>
+            <param name="result">返回的结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.projection(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.OrientationType,System.Int32[]@)">
+            <summary>
+             投影
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="orientType">投影的方向(水平或垂直)</param>
+            <param name="result">投影的结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.projection(System.Byte[]@,System.Int32,System.Int32,ValueImage.Infrastructure.OrientationType,System.Boolean,System.Int32[]@)">
+            <summary>
+             投影
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="orientType">投影的方向(水平或垂直)</param>
+            <param name="average">是否去平均值</param>
+            <param name="result">投影的结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.projection(System.Byte[]@,System.Int32,System.Int32,System.Double,ValueImage.Infrastructure.OrientationType,System.Int32[]@)">
+            <summary>
+             投影
+            </summary>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.density(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Drawing.Rectangle[]@)">
+            <summary>
+             确定图像密度矩形
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="endureWidth">容忍空白区域宽度</param>
+            <returns>确定的密度矩形</returns>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.noisePoint(System.Byte[]@,System.Int32,System.Int32,System.Drawing.Point[]@)">
+            <summary>
+             确定噪声点
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="result">噪声点</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.zeroCross(System.Double[]@,System.Int32,System.Int32,System.Double,System.Byte[]@)">
+            <summary>
+             零交叉法阈值处理(二值化)
+            </summary>
+            <param name="rectangleData">二维数据</param>
+            <param name="width">宽度</param>
+            <param name="height">长度</param>
+            <param name="thresh">阈值</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.getFilterWindow(System.Int32,System.Int32,System.Int32,ValueImage.Infrastructure.FilterWindowType)">
+            <summary>
+             获得滤波窗口
+            </summary>
+            <param name="index">当前像素索引</param>
+            <param name="width">二维数据宽度</param>
+            <param name="height">二维数据高度</param>
+            <param name="type">窗口类型</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.getFilterWindow(System.Int32,System.Int32,System.Int32,ValueImage.Infrastructure.TemplateType)">
+            <summary>
+             获得滤波窗口
+            </summary>
+            <param name="index">当前像素索引</param>
+            <param name="width">二维数据宽度</param>
+            <param name="height">二维数据高度</param>
+            <param name="type">窗口类型</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.getFilterWindow2x2(System.Int32,System.Int32,System.Int32)">
+            <summary>
+             获得2x2索引 当前元素为左下角
+            </summary>
+            <param name="index">当前元素索引</param>
+            <param name="width">二维数据宽度</param>
+            <param name="height">二维数据高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.getFilterWindow3x3(System.Int32,System.Int32,System.Int32,ValueImage.Infrastructure.DirectType)">
+            <summary>
+             获得3x3索引 当前元素为正中心
+            </summary>
+            <param name="index">当前元素索引</param>
+            <param name="width">二维数据宽度</param>
+            <param name="height">二维数据高度</param>
+            <param name="type">顺时针或者逆时针</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.getExistFilterWindow3x3(System.Int32,System.Int32,System.Int32,ValueImage.Infrastructure.DirectType)">
+            <summary>
+             获得3x3索引 当前元素为正中心 只获取存在的邻域索引
+            </summary>
+            <param name="index"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.getFilterWindow3x3(System.Byte[]@,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte,ValueImage.Infrastructure.DirectType)">
+            <summary>
+             获取3x3窗体
+             统一正上方为突入外围点(即当前点索引为0, 正上方点索引为1)
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="x">当前点横坐标</param>
+            <param name="y">当前点纵坐标</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="overstepColor">超出边界的点的填充值</param>
+            <param name="type">窗口索引的方向</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.frequency(System.Byte[]@,System.Int32[]@)">
+            <summary>
+             频率
+            </summary>
+            <param name="data"></param>
+            <param name="result"></param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.grayscaleStretch(System.Byte[]@)">
+            <summary>
+             灰度拉伸
+            </summary>
+            <param name="data">二维数据</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.optimalThreshold(System.Byte[]@,System.Int32,System.Int32,System.Byte[]@)">
+            <summary>
+             最优阈值化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.ostuThreshold(System.Byte[]@,System.Int32,System.Int32)">
+            <summary>
+             获得Ostu阈值化的最佳阈值
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <returns>阈值</returns>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Base.ImageBase.binarization(System.Byte[]@,System.Int32)">
+            <summary>
+             二值化
+            </summary>
+            <param name="data">二维数据</param>
+            <param name="thresholding">阈值</param>
+        </member>
+        <member name="T:ValueImage.ImageFactory.Base.ImageBase.LinePoint">
+            <summary>
+             直线(两点,即附近关联直线)
+            </summary>
+        </member>
+        <member name="T:ValueImage.Interface.IBinarization">
+            <summary>
+             对图像的二值处理接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.Projection(System.Drawing.Bitmap,ValueImage.Infrastructure.OrientationType)">
+            <summary>
+             映射
+             投影取值未平均
+            </summary>
+            <param name="orientType">映射方向</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.Projection(System.Drawing.Bitmap,System.Double,ValueImage.Infrastructure.OrientationType)">
+            <summary>
+             按一定角度映射
+             投影取值未平均
+            </summary>
+            <param name="angle">角度</param>
+            <param name="orientType">映射方向</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.RobortsEdge(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             Roborts算子边缘锐化
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.kFillFilter(System.Drawing.Bitmap)">
+            <summary>
+             kFill滤波器
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.CutRectangle(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+             切割矩形
+            </summary>
+            <param name="startRow">起始行索引</param>
+            <param name="startCol">起始列索引</param>
+            <param name="endRow">终止行索引</param>
+            <param name="endCol">终止列索引</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.BileanerZoom(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+             双线性插值缩放
+            </summary>
+            <param name="width">缩放后宽度</param>
+            <param name="height">缩放后高度</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.BileanerRotate(System.Drawing.Bitmap,System.Double)">
+            <summary>
+             双线性插值法
+            </summary>
+            <param name="angle">旋转的角度</param>
+            <returns></returns>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.HilditchThinning(System.Drawing.Bitmap)">
+            <summary>
+             Hilditch细化
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.ZhangThinning(System.Drawing.Bitmap)">
+            <summary>
+             Zhang细化
+            </summary>
+            <param name="srcImage"></param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.OffsetAngle(System.Drawing.Bitmap)">
+            <summary>
+             获得图片的偏移角度
+            </summary>
+            <returns>偏移的角度</returns>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.ConvertToBytes(System.Drawing.Bitmap,System.Byte[0:,0:]@)">
+            <summary>
+             将图片数据转化为字节型数组
+            </summary>
+            <param name="data">转化为字节型的数组</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.ConvertToBytes(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+             将矩形内的图像转化会字节型数组
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.NosieKiller(System.Drawing.Bitmap,ValueImage.Infrastructure.FilterLevelType)">
+            <summary>
+             剔除指定矩形大小噪声
+            </summary>
+            <param name="level">操作最大大小</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.FillBreakpoint(System.Drawing.Bitmap,ValueImage.Infrastructure.FilterLevelType)">
+            <summary>
+             填充断点
+            </summary>
+            <param name="level">填充的等级</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.ShewDetection(System.Drawing.Bitmap,ValueImage.Infrastructure.ShewDetectionType)">
+            <summary>
+             倾斜检测
+            </summary>
+            <param name="type">检测类型</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.ShewCorrection(System.Drawing.Bitmap,ValueImage.Infrastructure.ShewDetectionType)">
+            <summary>
+             倾斜矫正
+            </summary>
+            <param name="type">倾斜检测的方法</param>
+        </member>
+        <member name="M:ValueImage.Interface.IBinarization.MedianFilter(System.Drawing.Bitmap,ValueImage.Infrastructure.TemplateType)">
+            <summary>
+             中值滤波
+            </summary>
+        </member>
+        <member name="T:ValueImage.Interface.IOther">
+            <summary>
+             图像其它接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.InvertColor(System.Drawing.Bitmap)">
+            <summary>
+             反色
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.HistEqualization(System.Drawing.Bitmap)">
+            <summary>
+             直方图均衡化
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.HistMatch(System.Drawing.Bitmap,System.Int32[])">
+            <summary>
+             直方图匹配
+            </summary>
+            <param name="histogram">要匹配的直方图模板</param>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.BlurryNoiseDetect(System.Drawing.Bitmap)">
+            <summary>
+             模糊噪声监测
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.ConvertToBytes(System.Drawing.Bitmap,System.Byte[0:,0:]@)">
+            <summary>
+             将图片数据转化为字节型数组
+            </summary>
+            <param name="data">转化为字节型的数组</param>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.ConvertToBytes(System.Drawing.Bitmap,System.Byte[0:,0:]@,System.Byte[0:,0:]@,System.Byte[0:,0:]@)">
+            <summary>
+             将图片数据转化为字节型数组
+            </summary>
+            <param name="datab">字节型数组B分量</param>
+            <param name="datar">字节型数组R分量</param>
+            <param name="datag">字节型数组G分量</param>
+        </member>
+        <member name="M:ValueImage.Interface.IOther.OffsetAngle(System.Drawing.Bitmap)">
+            <summary>
+             获得图片的偏移角度
+            </summary>
+            <returns>偏移的角度</returns>
+        </member>
+        <member name="T:ValueImage.Interface.INoise">
+            <summary>
+             图形噪声接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.INoise.Noise(System.Drawing.Bitmap,ValueImage.Infrastructure.NoiseType)">
+            <summary>
+             噪声
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.INoise.GaussNoise(System.Drawing.Bitmap,System.Double,System.Double)">
+            <summary>
+             高斯噪声
+            </summary>
+            <param name="mean">均值</param>
+            <param name="meanDeviation">均方差</param>
+        </member>
+        <member name="M:ValueImage.Interface.INoise.RayleighNoise(System.Drawing.Bitmap,System.Double,System.Double)">
+            <summary>
+             瑞利噪声
+            </summary>
+            <param name="paramA">参数A</param>
+            <param name="paramB">参数B</param>
+        </member>
+        <member name="M:ValueImage.Interface.INoise.IndexNoise(System.Drawing.Bitmap,System.Double)">
+            <summary>
+             指数噪声
+            </summary>
+            <param name="param">参数a(a>0)</param>
+        </member>
+        <member name="T:ValueImage.Interface.IValueImage">
+            <summary>
+             ValueImage实现接口
+            </summary>
+        </member>
+        <member name="T:ValueImage.Interface.IGray">
+            <summary>
+             图形灰度处理结果
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.ConvertToGrayscale(System.Drawing.Bitmap,ValueImage.Infrastructure.GrayscaleType)">
+            <summary>
+             图形灰度化接口
+            </summary>
+            <param name="type">灰度化类型</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.ConvertToGrayscale(System.Drawing.Bitmap,System.Single,System.Single,System.Single)">
+            <summary>
+             加权灰度化
+            </summary>
+            <param name="weightR">像素R的权重</param>
+            <param name="weightG">像素G的权重</param>
+            <param name="weightB">像素B的权重</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.GrayscaleStretch(System.Drawing.Bitmap)">
+            <summary>
+             灰度拉伸
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.GrayscaleStretch(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+             灰度拉伸
+            </summary>
+            <param name="x1">拐点1横坐标</param>
+            <param name="y1">拐点1纵坐标</param>
+            <param name="x2">拐点2横坐标</param>
+            <param name="y2">拐点2纵坐标</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.Binarization(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             二值化
+            </summary>
+            <param name="throsholding">阈值</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.OptimalThreshold(System.Drawing.Bitmap)">
+            <summary>
+             最优阈值化
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGray.OstuThreshold(System.Drawing.Bitmap)">
+            <summary>
+             Ostu阈值化
+            </summary>
+            <param name="srcImage"></param>
+        </member>
+        <member name="T:ValueImage.Interface.IFrequency">
+            <summary>
+             图形频率变化接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.FFT(System.Drawing.Bitmap,System.Boolean)">
+            <summary>
+             快速傅里叶变化
+            </summary>
+            <param name="inv">是否进行坐标位移变换</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.Amplitude(System.Drawing.Bitmap)">
+            <summary>
+             幅度图像
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.Phase(System.Drawing.Bitmap)">
+            <summary>
+             相位图像
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.Gabor(System.Drawing.Bitmap,MathHelper.Infrastructure.GaborParam)">
+            <summary>
+             Gabor滤波
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.Projection(System.Drawing.Bitmap,ValueImage.Infrastructure.OrientationType)">
+            <summary>
+             映射
+            </summary>
+            <param name="orientType">映射方向</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.Projection(System.Drawing.Bitmap,System.Double,ValueImage.Infrastructure.OrientationType)">
+            <summary>
+             按一定角度映射
+            </summary>
+            <param name="angle">角度</param>
+            <param name="orientType">映射方向</param>
+        </member>
+        <member name="M:ValueImage.Interface.IFrequency.Density(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             图像密度区域(二值)
+             自创, 效率效果有待提高
+            </summary>
+            <param name="endureWidth">容忍白点宽度</param>
+        </member>
+        <member name="T:ValueImage.Interface.IDisNoise">
+            <summary>
+             图形去噪接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.Erode(System.Drawing.Bitmap,ValueImage.Infrastructure.FilterWindowType)">
+            <summary>
+             腐蚀
+            </summary>
+            <param name="type">滤窗的格式</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.Delation(System.Drawing.Bitmap,ValueImage.Infrastructure.FilterWindowType)">
+            <summary>
+             膨胀
+            </summary>
+            <param name="type">滤窗的格式</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.Open(System.Drawing.Bitmap,ValueImage.Infrastructure.FilterWindowType)">
+            <summary>
+             开运算
+            </summary>
+            <param name="type">滤窗的格式</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.Close(System.Drawing.Bitmap,ValueImage.Infrastructure.FilterWindowType)">
+            <summary>
+             闭运算
+            </summary>
+            <param name="type">滤窗的格式</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.GrayDelation(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+             灰度形态学膨胀
+            </summary>
+            <param name="template">模板集合</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.GrayErode(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+             灰度形态学腐蚀
+            </summary>
+            <param name="template">模板集合</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.GrayOpen(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+             灰度形态学开运算
+            </summary>
+            <param name="template">模板集合</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.GrayClose(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+             灰度形态学闭运算
+            </summary>
+            <param name="template">模板集合</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.GrayMorphologic(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+             灰度形态学
+            </summary>
+            <param name="template">模板集合</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDisNoise.kFillFilter(System.Drawing.Bitmap)">
+            <summary>
+             kFill滤波器
+            </summary>
+        </member>
+        <member name="T:ValueImage.Interface.IEdge">
+            <summary>
+             图形边缘锐化接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.MaskEgde(System.Drawing.Bitmap,ValueImage.Infrastructure.MaskType,System.Int32)">
+            <summary>
+             模板算子计算
+            </summary>
+            <param name="thresholding">阈值</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.RobertsEgde(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             Roberts算子边缘锐化
+            </summary>
+            <param name="thresholding">阈值</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.PrewittEgde(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             Prewitt算子锐化
+            </summary>
+            <param name="thresholding">阈值(为零的话不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.SobelEgde(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             Sobel算子锐化
+            </summary>
+            <param name="thresholding">阈值(为零的话不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.LaplacianEgde(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+             拉普拉斯算子
+            </summary>
+            <param name="thresholding">阈值(为零的话不进行二值化)</param>
+            <param name="number">拉普拉斯算子序号</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.KirschEgde(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             Kirsch算子锐化
+            </summary>
+            <param name="thresholding">阈值(为零的话不进行二值化)</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.GaussEgde(System.Drawing.Bitmap,ValueImage.Infrastructure.GaussFilterType,System.Double,System.Double)">
+            <summary>
+             高斯算子锐化
+            </summary>
+            <param name="type">高斯过滤类型</param>
+            <param name="sigma">方差</param>
+            <param name="thresholding">阈值</param>
+        </member>
+        <member name="M:ValueImage.Interface.IEdge.CannyEgde(System.Drawing.Bitmap,System.Double,System.Byte[])">
+            <summary>
+             Canny算子
+            </summary>
+            <param name="sigma">均方差</param>
+            <param name="thresholding">阈值</param>
+        </member>
+        <member name="T:ValueImage.Interface.IDivision">
+            <summary>
+             图形分割接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IDivision.CutRectangle(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+             切割矩形
+            </summary>
+            <param name="startRow">起始行索引</param>
+            <param name="startCol">起始列索引</param>
+            <param name="endRow">终止行索引</param>
+            <param name="endCol">终止列索引</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDivision.UniformQuantization(System.Drawing.Bitmap,ValueImage.Infrastructure.ColorBytes[])">
+            <summary>
+             均匀量化
+            </summary>
+            <param name="prototypeColor">原型色</param>
+        </member>
+        <member name="M:ValueImage.Interface.IDivision.HilditchThinning(System.Drawing.Bitmap)">
+            <summary>
+             Hilditch细化
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IDivision.ZhangThinning(System.Drawing.Bitmap)">
+            <summary>
+             Zhang细化
+            </summary>
+            <param name="srcImage"></param>
+        </member>
+        <member name="M:ValueImage.Interface.IDivision.ZhangExpandThinning(System.Drawing.Bitmap)">
+            <summary>
+             Zhang扩展细化
+            </summary>
+            <param name="srcImage"></param>
+        </member>
+        <member name="T:ValueImage.Interface.IGeometry">
+            <summary>
+             图像集合变换接口
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.FillRectangle(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+             填充矩形
+            </summary>
+            <param name="startRow">起始行索引</param>
+            <param name="startCol">起始列索引</param>
+            <param name="endRow">终止行索引</param>
+            <param name="endCol">终止列索引</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.LinearChange(System.Drawing.Bitmap,System.Single,System.Single)">
+            <summary>
+             对图像已指定像素按 kx+b 线性变换
+            </summary>
+            <param name="slope">斜率</param>
+            <param name="displacements">平移</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.Move(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+             平移
+            </summary>
+            <param name="x">横向位移</param>
+            <param name="y">纵向位移</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.HoriMirror(System.Drawing.Bitmap)">
+            <summary>
+             水平镜像
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.VertMirror(System.Drawing.Bitmap)">
+            <summary>
+             垂直镜像
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.Zoom(System.Drawing.Bitmap,System.Double,System.Double,ValueImage.Infrastructure.ZoomType)">
+            <summary>
+             图像缩放
+            </summary>
+            <param name="type">缩放算法</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.BileanerZoom(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+             双线性插值缩放
+            </summary>
+            <param name="srcImage"></param>
+            <param name="zoomingX"></param>
+            <param name="zoomingY"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.Rotate(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+             旋转
+            </summary>
+            <param name="degree">角度</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.BileanerRotate(System.Drawing.Bitmap,System.Double)">
+            <summary>
+             双线性插值法
+            </summary>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.BileanerRotate(System.Drawing.Bitmap,System.Double,System.Drawing.Color)">
+            <summary>
+             双线性插值法
+            </summary>
+            <param name="backColor">背景颜色</param>
+        </member>
+        <member name="M:ValueImage.Interface.IGeometry.SpliceImage(ValueImage.Infrastructure.ImageInfo[])">
+            <summary>
+             拼接图片
+            </summary>
+            <param name="infos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Bit24.ImageBit24.createImage(System.Byte[]@,System.Byte[]@,System.Byte[]@,System.Int32,System.Int32,System.Drawing.Imaging.PixelFormat,System.Drawing.Bitmap@)">
+            <summary>
+             创建图片
+            </summary>
+            <param name="datab">b分量数据</param>
+            <param name="datag">g分量数据</param>
+            <param name="datar">r分量数据</param>
+            <param name="width">数据宽度</param>
+            <param name="height">数据高度</param>
+            <param name="format">图片格式</param>
+            <param name="result">图片结果</param>
+        </member>
+        <member name="M:ValueImage.ImageFactory.Bit24.ImageBit24.grayscaleStretchCalc(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+             灰度拉伸拉伸点算法
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.RateFilterRadius">
+            <summary>
+             各滤波形式的半径大小
+             低通、带阻、带通、高通
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.RateFilterRadius.LowPass">
+            <summary>
+             低通滤波掩码半径
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.RateFilterRadius.BandStopOuter">
+            <summary>
+             带阻掩码外园半径
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.RateFilterRadius.BandStopInner">
+            <summary>
+             带阻掩码内圆半径
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.RateFilterRadius.BandPassOuter">
+            <summary>
+             带通掩码外圆半径
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.RateFilterRadius.BandPassInner">
+            <summary>
+             带通掩码内圆半径
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.RateFilterRadius.HighPass">
+            <summary>
+             高通半径
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.RateFilterType">
+            <summary>
+             频率滤波类型
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.GrayscaleType">
+            <summary>
+             灰度转化的类型
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.GrayscaleType.Maximum">
+            <summary>
+             最大灰度化
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.GrayscaleType.Minimal">
+            <summary>
+             最小灰度化
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.GrayscaleType.Average">
+            <summary>
+             中值灰度化
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.WaveletLowpassType">
+            <summary>
+             小波滤波类型
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.WaveletLowpass">
+            <summary>
+             小波变化低通值
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.OperatorSet">
+            <summary>
+             算子集合
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.FilterLevelType">
+            <summary>
+             滤波窗口格子数
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level01">
+            <summary>
+             1x1点
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level02">
+            <summary>
+             2x2区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level03">
+            <summary>
+             3x3区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level04">
+            <summary>
+             4x4区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level05">
+            <summary>
+             5x5区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level06">
+            <summary>
+             6x6区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level07">
+            <summary>
+             7x7区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level08">
+            <summary>
+             8x8区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level09">
+            <summary>
+             9x9区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level10">
+            <summary>
+             10x10区域
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level15">
+            <summary>
+             15x15
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterLevelType.Level16">
+            <summary>
+             16x16
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.ZoomType">
+            <summary>
+             缩放的算法选择
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.ZoomType.NearestNeighbor">
+            <summary>
+             最近邻插值法
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.ZoomType.Amphilinearity">
+            <summary>
+             双线性插值法
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.NoiseType">
+            <summary>
+             噪声类型
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.NoiseType.Gauss">
+            <summary>
+             高斯噪声
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.NoiseType.Rayleigh">
+            <summary>
+             瑞利噪声
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.NoiseType.Index">
+            <summary>
+             指数噪声
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.NoiseType.Pepper">
+            <summary>
+             椒盐噪声
+            </summary>
+        </member>
+        <member name="T:ValueImage.ValueImageManager">
+            <summary>
+             ValueImage管理者
+            </summary>
+        </member>
+        <member name="M:ValueImage.ValueImageManager.GetValueImage(System.Drawing.Imaging.PixelFormat)">
+            <summary>
+             获得ValueImage实例
+            </summary>
+            <param name="format">图像像素类型</param>
+        </member>
+        <member name="T:ValueImage.Infrastructure.ColorBytes">
+            <summary>
+             存储颜色的比特值分量
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.ColorBytes.colorComponent">
+            <summary>
+             颜色分量
+            </summary>
+        </member>
+        <member name="P:ValueImage.Infrastructure.ColorBytes.ColorComponent">
+            <summary>
+             颜色分量,用内存法时的顺序
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.GaussFilterType">
+            <summary>
+             高斯滤波的类型
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.DirectType">
+            <summary>
+             方向
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.DirectType.Clock">
+            <summary>
+             顺时针
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.DirectType.UntiClock">
+            <summary>
+             逆时针
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.OrientationType">
+            <summary>
+             水平或垂直的
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.OrientationType.Horizontal">
+            <summary>
+             水平线
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.OrientationType.Vertical">
+            <summary>
+             垂直线
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.ImageInfo">
+            <summary>
+             图像信息类
+            </summary>
+        </member>
+        <member name="P:ValueImage.Infrastructure.ImageInfo.Location">
+            <summary>
+             图像的位置
+            </summary>
+        </member>
+        <member name="P:ValueImage.Infrastructure.ImageInfo.Size">
+            <summary>
+             图像的大小
+            </summary>
+        </member>
+        <member name="T:ValueImage.Infrastructure.FilterWindowType">
+            <summary>
+             滤波窗口类型
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Hori3">
+            <summary>
+             3位水平形状
+               □■□
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Vert3">
+            <summary>
+             3位垂直形状
+                 □
+                 ■
+                 □
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Cros3">
+            <summary>
+             3位十字形状 
+                 □
+               □■□
+                 □
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Rect3">
+            <summary>
+             3位方形
+              □□□
+              □■□
+              □□□
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Hori5">
+            <summary>
+             5位水平形状   
+             □□■□□   
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Vert5">
+            <summary>
+             5位垂直形状
+                 □
+                 □
+                 ■
+                 □
+                 □
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Cros5">
+            <summary>
+             5位十字形状
+                 □
+                 □
+             □□■□□
+                 □
+                 □
+            </summary>
+        </member>
+        <member name="F:ValueImage.Infrastructure.FilterWindowType.Rect5">
+            <summary>
+             5位方形       
+            □□□□□
+            □□□□□
+            □□■□□
+            □□□□□
+            □□□□□               
+            </summary>
+        </member>
+    </members>
+</doc>

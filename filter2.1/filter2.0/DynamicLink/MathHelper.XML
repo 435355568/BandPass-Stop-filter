@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MathHelper</name>
+    </assembly>
+    <members>
+        <member name="M:MathHelper.ValueMath.Ratio(System.Int32[])">
+            <summary>
+             获取序列中数值的比例
+            </summary>
+            <param name="array">数组</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Ratio(System.Int32[],System.Boolean)">
+            <summary>
+             获取序列中数值的比例
+            </summary>
+            <param name="array">数组</param>
+            <param name="removeZero">是否移除零</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Ratio(System.Int32[],System.Boolean,System.Boolean)">
+            <summary>
+             获取序列中数值的比例
+            </summary>
+            <param name="array">数组</param>
+            <param name="summary">是否汇总</param>
+            <param name="removeZero">是否移除零</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.BubbleSort(System.Collections.Generic.IList{System.Int32},MathHelper.Infrastructure.SortMode)">
+            <summary>
+             冒泡排序
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.ChurningSort(System.Collections.Generic.IList{System.Int32},MathHelper.Infrastructure.SortMode)">
+            <summary>
+             搅拌排序
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.InsertionSort(System.Collections.Generic.IList{System.Int32},MathHelper.Infrastructure.SortMode)">
+            <summary>
+             插入算法
+             Φ(n^2)
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MergenSort(System.Collections.Generic.IList{System.Int32},MathHelper.Infrastructure.SortMode)">
+            <summary>
+             归并算法
+             Φ(nlgn)
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.FFT(MathHelper.Infrastructure.Complex[],System.Int32)">
+            <summary>
+             快速傅里叶变化
+             条件: 长度必须是以2为底的整数次幂
+            </summary>
+            <param name="sourceData">待变化序列</param>
+            <param name="countN">序列长度</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.IFFT(MathHelper.Infrastructure.Complex[],System.Int32)">
+            <summary>
+             快速傅里叶逆变换
+            </summary>
+            <param name="sourceData">带变化序列</param>
+            <param name="countN">序列长度</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Wavelet(System.Double[]@,System.Double[],System.Double[],System.Double[]@,System.Double[]@)">
+            <summary>
+             一维小波变换
+            </summary>
+            <param name="scaleIn">小波变换前的尺度,即平滑信号</param>
+            <param name="lowpass">与尺度函数相关的低通滤波器</param>
+            <param name="highpass">与小波函数相关的高通滤波器</param>
+            <param name="scaleOut">小波变换后的尺度系数</param>
+            <param name="wavelet">小波变换后的小波系数,即细节信号</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.IWavelet(System.Double[]@,System.Double[],System.Double[],System.Double[],System.Double[]@)">
+            <summary>
+             一维小波逆变换
+            </summary>
+            <param name="lowpass">与尺度函数相关的低通滤波器</param>
+            <param name="highpass">与尺度函数相关的高通滤波器</param>
+            <param name="scaleIn">小波逆变换前的尺度系数,即平滑信号</param>
+            <param name="wavelet">小波逆变换前的小波系数,即细节信号</param>
+            <param name="scaleOut">小波逆变换后的尺度系数,即平滑信号</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Wavelet2D(System.Double[]@,System.Int32,System.Int32,System.Double[],System.Double[],System.Int32)">
+            <summary>
+             二维小波变换
+            </summary>
+            <param name="width">二维信号宽度</param>
+            <param name="height">二维信号高度</param>
+            <param name="lowpass">与尺度函数相关的低通滤波器</param>
+            <param name="highpass">与小波函数相关的高通滤波器</param>
+            <param name="series">关于小波变换级数的参数</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.IWavelet2D(System.Double[]@,System.Int32,System.Int32,System.Double[],System.Double[],System.Int32)">
+            <summary>
+             二维小波逆变换
+            </summary>
+            <param name="width">二维信号宽度</param>
+            <param name="height">二维信号高度</param>
+            <param name="lowpass">与尺度函数相关的低通滤波器</param>
+            <param name="highpass">与小波函数相关的高通滤波器</param>
+            <param name="series">关于小波变换级数的参数</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Gabor(System.Int32,System.Int32,MathHelper.Infrastructure.GaborParam)">
+            <summary>
+             Gabor 复数
+            </summary>
+            <param name="param">Gabor算法需要传递的参数</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Gabor(System.Double,System.Double)">
+            <summary>
+             Gabor复数
+            </summary>
+            <param name="sigma">σ</param>
+            <param name="omega">ω</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.InsertSort``1(``0[],MathHelper.Infrastructure.SortMode)">
+            <summary>
+             插入算法
+            </summary>
+            <typeparam name="T">实现IComparable接口的对象</typeparam>
+            <param name="list">对象数组</param>
+            <param name="mode">排序的顺序</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.InsertSort``1(``0[],System.String,MathHelper.Infrastructure.SortMode)">
+            <summary>
+             插入算法
+            </summary>
+            <typeparam name="T">需排序的对象类型</typeparam>
+            <param name="list">需排序的数组对象</param>
+            <param name="sortField">对象需排序的字段</param>
+            <param name="mode">排序的顺序</param>
+        </member>
+        <member name="M:MathHelper.ValueMath.Max(System.Single[])">
+            <summary>
+             获得最大值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Max(System.Double[])">
+            <summary>
+             获得最大值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Max(System.Int32[])">
+            <summary>
+             获得最大值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MaxIndex(System.Single[])">
+            <summary>
+             获得最大值索引值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MaxIndex(System.Double[])">
+            <summary>
+             获得最大值索引值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MaxIndex(System.Int32[])">
+            <summary>
+             获得最大值索引值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Min(System.Single[])">
+            <summary>
+             获得最小值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Min(System.Double[])">
+            <summary>
+             获得最小值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Min(System.Int32[])">
+            <summary>
+             获得最小值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MinIndex(System.Single[])">
+            <summary>
+             获得最小值索引值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MinIndex(System.Double[])">
+            <summary>
+             获得最小值索引值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.MinIndex(System.Int32[])">
+            <summary>
+             获得最小值索引值
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Average(System.Single[])">
+            <summary>
+             获得平均数
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Average(System.Double[])">
+            <summary>
+             获得平均数
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.Average(System.Int32[])">
+            <summary>
+             获得平均数
+            </summary>
+        </member>
+        <member name="M:MathHelper.ValueMath.StandardDeviation(System.Int32[])">
+            <summary>
+             计算均方差
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MathHelper.Infrastructure.Complex">
+            <summary>
+             复数结构
+            </summary>
+        </member>
+        <member name="F:MathHelper.Infrastructure.Complex.real">
+            <summary>
+             复数的实部
+            </summary>
+        </member>
+        <member name="F:MathHelper.Infrastructure.Complex.imaginary">
+            <summary>
+             复数的虚部
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.Add(MathHelper.Infrastructure.Complex)">
+            <summary>
+             复数加法
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.Subtract(MathHelper.Infrastructure.Complex)">
+            <summary>
+             复数减法
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.Multiply(MathHelper.Infrastructure.Complex)">
+            <summary>
+             复数乘法
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.Abs">
+            <summary>
+             求幅度
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.Angle">
+            <summary>
+             求相位角
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.Conjugate">
+            <summary>
+             共轭复数
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.op_Addition(MathHelper.Infrastructure.Complex,MathHelper.Infrastructure.Complex)">
+            <summary>
+             +运算符重载
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.op_Subtraction(MathHelper.Infrastructure.Complex,MathHelper.Infrastructure.Complex)">
+            <summary>
+             -运算符重载
+            </summary>
+        </member>
+        <member name="M:MathHelper.Infrastructure.Complex.op_Multiply(MathHelper.Infrastructure.Complex,MathHelper.Infrastructure.Complex)">
+            <summary>
+             *运算符重载
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.Complex.Real">
+            <summary>
+             实部的属性
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.Complex.Imaginary">
+            <summary>
+             虚部的属性
+            </summary>
+        </member>
+        <member name="T:MathHelper.Infrastructure.SortMode">
+            <summary>
+             升序或者降序
+            </summary>
+        </member>
+        <member name="F:MathHelper.Infrastructure.SortMode.Descending">
+            <summary>
+             降序
+            </summary>
+        </member>
+        <member name="F:MathHelper.Infrastructure.SortMode.Ascending">
+            <summary>
+             升序
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.GaborParam.Lambda">
+            <summary>
+             λ
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.GaborParam.Psi">
+            <summary>
+             ψ
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.GaborParam.Theta">
+            <summary>
+             θ
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.GaborParam.Sigma">
+            <summary>
+             σ
+            </summary>
+        </member>
+        <member name="P:MathHelper.Infrastructure.GaborParam.Gamma">
+            <summary>
+             γ
+            </summary>
+        </member>
+    </members>
+</doc>

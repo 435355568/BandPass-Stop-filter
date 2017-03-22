@@ -1,0 +1,11 @@
+﻿<Window x:Class="filter2._0.daizu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="带阻滤波器" Height="635.821" Width="717.91">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="67,10,0,0" TextWrapping="Wrap" Text="图像经带阻滤波器处理后的图片：" VerticalAlignment="Top"/>
+        <Image Name="dz_Image" HorizontalAlignment="Left" Height="512" Margin="67,48,0,0" VerticalAlignment="Top" Width="512" Stretch="Fill"/>
+        <Button Content="保存图片" HorizontalAlignment="Left" Margin="293,576,0,0" VerticalAlignment="Top" Width="75" Name="Save_Bandstop" Click="Save_Bandstop_Click"/>
+
+    </Grid>
+</Window>
